@@ -26,15 +26,17 @@ export SERVICE_ENDPOINT="http://127.0.0.1:35357/v2.0"
 export SERVICE_TENANT_NAME=service
 EOF
 
+. ./stackrc
+
 # edit keystone conf file to use templates and mysql
 cp /etc/keystone/keystone.conf /etc/keystone/keystone.conf.orig
-#sed -e "
-#/^admin_token = ADMIN/s/^.*$/admin_token = $token/
-#/^driver = keystone.catalog.backends.sql.Catalog/d
-#/^\[catalog\]/a driver = keystone.catalog.backends.templated.TemplatedCatalog 
-#/^\[catalog\]/a template_file = /etc/keystone/default_catalog.templates
-#/^connection =.*$/s/^.*$/connection = mysql:\/\/keystone:$password@127.0.0.1\/keystone/
-#" -i /etc/keystone/keystone.conf
+sed -e "
+/^admin_token = ADMIN/s/^.*$/admin_token = $token/
+/^driver = keystone.catalog.backends.sql.Catalog/d
+/^\[catalog\]/a driver = keystone.catalog.backends.templated.TemplatedCatalog 
+/^\[catalog\]/a template_file = /etc/keystone/default_catalog.templates
+/^connection =.*$/s/^.*$/connection = mysql:\/\/keystone:$password@127.0.0.1\/keystone/
+" -i /etc/keystone/keystone.conf
 
 # create db tables and restart
 keystone-manage db_sync
