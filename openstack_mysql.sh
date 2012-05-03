@@ -11,7 +11,7 @@ echo ""
 apt-get install -y mysql-server python-mysqldb
 
 # make mysql listen on 0.0.0.0
-sudo sed -i '/^bind-address/s/127.0.0.1/0.0.0.0/g' /etc/my.cnf
+sudo sed -i '/^bind-address/s/127.0.0.1/0.0.0.0/g' /etc/mysql/my.cnf
 
 # restart
 service mysql restart
