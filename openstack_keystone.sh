@@ -13,17 +13,35 @@ read -p "Enter a token for the OpenStack services to auth wth keystone: " token
 read -p "Enter the password you used for the MySQL users (nova, glance, keystone): " password
 read -p "Enter the email address for service accounts (nova, glance, keystone): " email
 
-# edit keystone conf file to use templates and mysql
-sed -e "
-/^admin_token = ADMIN/s/^.*$/admin_token = $token/
-/^driver = keystone.catalog.backends.sql.Catalog/d
-/^\[catalog\]/a driver = keystone.catalog.backends.templated.TemplatedCatalog 
-/^\[catalog\]/a template_file = /etc/keystone/default_catalog.templates
-/^connection =.*$/s/^.*$/connection = mysql:\/\/keystone:$password@127.0.0.1\/keystone/
-" -i /etc/keystone/keystone.conf
+# set up env variables for testing
+cat > stackrc <<EOF
+export OS_TENANT_NAME=admin
+export OS_USERNAME=admin
+export OS_PASSWORD=$password
+export OS_AUTH_URL="http://127.0.0.1:5000/v2.0/" 
+export ADMIN_PASSWORD=$password
+export SERVICE_PASSWORD=$password
+export SERVICE_TOKEN=$token
+export SERVICE_ENDPOINT="http://127.0.0.1:35357/v2.0"
+export SERVICE_TENANT_NAME=service
+EOF
 
+# edit keystone conf file to use templates and mysql
+cp /etc/keystone/keystone.conf /etc/keystone/keystone.conf.orig
+#sed -e "
+#/^admin_token = ADMIN/s/^.*$/admin_token = $token/
+#/^driver = keystone.catalog.backends.sql.Catalog/d
+#/^\[catalog\]/a driver = keystone.catalog.backends.templated.TemplatedCatalog 
+#/^\[catalog\]/a template_file = /etc/keystone/default_catalog.templates
+#/^connection =.*$/s/^.*$/connection = mysql:\/\/keystone:$password@127.0.0.1\/keystone/
+#" -i /etc/keystone/keystone.conf
+
+# create db tables and restart
+keystone-manage db_sync
 service keystone restart
 
+
+# sleep a bit before we whack on it
 sleep 5
 
 ADMIN_PASSWORD=$password
@@ -122,3 +140,7 @@ if [[ "$ENABLED_SERVICES" =~ "quantum" ]]; then
                            --user $QUANTUM_USER \
                            --role $ADMIN_ROLE
 fi
+
+echo "######################################################################################"
+echo "Time to test keystone.  Do a '. ./stackrc' then a 'keystone user-list'."
+echo "######################################################################################"
