@@ -27,6 +27,8 @@ sleep 4
 
 echo "#######################################################################################"
 echo "Creating OpenStack databases and users.  Use your database password when prompted."
+echo ""
+echo "Run './openstack_keystone.sh' when the script exits."
 echo "#######################################################################################"
 
 mysql -u root -p <<EOF
@@ -40,7 +42,3 @@ CREATE DATABASE keystone;
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' IDENTIFIED BY '$service_pass';
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY '$service_pass';
 EOF
-
-echo "#######################################################################################"
-echo "Cool.  Run './openstack_keystone.sh' now."
-echo "#######################################################################################"
