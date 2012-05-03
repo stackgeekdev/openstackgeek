@@ -1,6 +1,6 @@
 #!/bin/bash
 
-read -p "Enter a password to be used for the OpenStack services (nova, glance, keystone): " service_pass
+read -p "Enter a password to be used for the OpenStack services to talk to MySQL (users nova, glance, keystone): " service_pass
 
 echo "#######################################################################################"
 echo "Setting up MySQL now.  You will be prompted for an admin password by the setup process."
