@@ -37,7 +37,8 @@ iface eth0 inet static
 
 auto eth1
 
-After you are done, do a '/etc/init.d/networking restart'
+After you are done, do a '/etc/init.d/networking restart', then run './opestack_prep_2.sh'
+
 #################################################################################################
 "
 

@@ -28,7 +28,10 @@ Next, do a:
 pvcreate -ff /dev/sdb1
 vgcreate nova-volumes /dev/sdb1
 
-Keep in mind you should use whatever device handle your system has.  Be careful!
+NOTE: You should use whatever device handle your system has.  Be careful!
+
+When you are done, run './openstack_mysql.sh'
+
 #################################################################################################
 "
 exit

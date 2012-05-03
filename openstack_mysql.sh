@@ -41,3 +41,6 @@ GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' IDENTIFIED BY '$service_pas
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY '$service_pass';
 EOF
 
+echo "#######################################################################################"
+echo "Cool.  Run './openstack_keystone.sh' now."
+echo "#######################################################################################"
