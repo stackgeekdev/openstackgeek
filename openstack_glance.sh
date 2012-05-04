@@ -39,15 +39,18 @@ else
    s,%SERVICE_PASSWORD%,$password,g;
    " -i /etc/glance/glance-api-paste.ini
    
-   echo "
-   [paste_deploy]
-   flavor = keystone
-   " >> /etc/glance/glance-api.conf
+# do not unindent!
+echo "
+[paste_deploy]
+flavor = keystone
+" >> /etc/glance/glance-api.conf
    
-   echo "
-   [paste_deploy]
-   flavor = keystone
-   " >> /etc/glance/glance-registry.conf
+# do not unindent!
+echo "
+[paste_deploy]
+flavor = keystone
+" >> /etc/glance/glance-registry.conf
+
    echo "#################################################################################################"
    echo "Backups of configs for glance are in /etc/glance/" 
    echo "#################################################################################################"
@@ -56,9 +59,9 @@ fi
 # create db tables and restart
 glance-manage version_control 0
 glance-manage db_sync
+sleep 4
 service glance-api restart
 service glance-registry restart
-
 sleep 4
 
 # add ubuntu image

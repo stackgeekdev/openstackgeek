@@ -145,4 +145,5 @@ fi
 
 echo "######################################################################################"
 echo "Time to test keystone.  Do a '. ./stackrc' then a 'keystone user-list'."
+echo "Assuming you get a user list back, go on to install glance with './openstack_glance.sh'."
 echo "######################################################################################"
