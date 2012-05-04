@@ -24,6 +24,9 @@ service tgt start
 # openiscsi-client
 apt-get install open-iscsi open-iscsi-utils
 
+# turn on forwarding
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
 echo "#################################################################################################
 Go edit your /etc/network/interfaces file to look something like this:
 
