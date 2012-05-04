@@ -32,11 +32,12 @@ Go edit your /etc/network/interfaces file to look something like this:
 
 auto eth0 
 iface eth0 inet static
- address 10.42.0.6
- network 10.42.0.0
+ address 10.0.1.20
+ network 10.0.1.0
  netmask 255.255.255.0
- broadcast 10.42.0.255
- gateway 10.42.0.1
+ broadcast 10.0.1.255
+ gateway 10.0.1.1
+ dns-nameservers 8.8.8.8
 
 auto eth1
 
