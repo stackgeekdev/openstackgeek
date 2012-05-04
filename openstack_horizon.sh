@@ -17,6 +17,6 @@ password=$SERVICE_PASSWORD
 host_ip=$(/sbin/ifconfig eth0| sed -n 's/.*inet *addr:\([0-9\.]*\).*/\1/p')
 
 echo "#######################################################################################"
-echo "The horizon dashboard shoul be at http://$host_ip/.  Login with admin/$password"
+echo "The horizon dashboard should be at http://$host_ip/.  Login with admin/$password"
 echo "#######################################################################################"
 
