@@ -9,7 +9,7 @@ fi
 # get keystone
 apt-get install keystone python-keystone python-keystoneclient
 
-read -p "Enter a token for the OpenStack services to auth wth keystone: " token
+read -p "Enter a token for the OpenStack services to auth with keystone: " token
 read -p "Enter the password you used for the MySQL users (nova, glance, keystone): " password
 read -p "Enter the email address for service accounts (nova, glance, keystone): " email
 
